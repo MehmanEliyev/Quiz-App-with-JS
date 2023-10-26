@@ -110,19 +110,19 @@ start.addEventListener("click" , ()=>{
 
 // ! ------------------------- Click ---------------------------------
 
-let sec = 11;
+let sec = 20;                                                             // -------------------------------- seconds --------------------------------
 let result = 0;
 let quest = 0;
 let questionNumb = 0;
 let customInterval = null;
 
-next.addEventListener("click", questionFunc) ;
 
 function questionFunc() {
   seconds.innerHTML = "";
-  seconds.style.color = "green";
-  sec = 11;
+  seconds.style.color = "#9f8295";
+  sec = 20;                                                                  // -------------------------------- seconds --------------------------------
   startTimer();
+  next.removeAttribute("disabled", "");
   
   seconds.classList.remove("d-none");
   
@@ -131,7 +131,7 @@ function questionFunc() {
     dis.classList.remove("active");
     dis.classList.remove("uncorrect");
   });
-
+  
   questionNumb++;
   question.innerHTML = lang[quest].question;
   numb.innerHTML = "QUESTION : " + questionNumb;
@@ -145,25 +145,24 @@ function questionFunc() {
 
 // ! ---------------- Timer Function -------------------------
 
-
 function timer() {
   sec--;
   if (sec != 0) {
     if(sec < 10){
-      seconds.style.color = "rgb(194, 33, 33)";
+      seconds.style.color = "#9f8295";
       seconds.innerHTML = "0 : 0" + sec;
     }else{
       seconds.innerHTML = "0 : " + sec;
     }
   } else {
-
+    
     if(quest < lang.length - 1){
       firstQuestionTimeOut = setTimeout ( questionFunc , 2000);
       seconds.innerHTML = "0 : 0" + sec;
       stopTimer();
+      next.setAttribute("disabled", "");
       variant.forEach((item) => {
         item.style.pointerEvents = "none";
-        // console.log(item);
       })
       
       if (quest < lang.length - 1) {
@@ -182,7 +181,7 @@ function timer() {
       stopTimer();
       speedOmeter();
       percentTimeOut = setTimeout(()=>{
-      percent = (result/lang.length)*100;
+        percent = (result/lang.length)*100;
         if (!counterInterval) {
           counterInterval = setInterval(()=>{
             
@@ -201,16 +200,60 @@ function timer() {
 
 function startTimer() {
   if (!customInterval) {
-    customInterval = setInterval(timer, 200);
+    customInterval = setInterval(timer, 1000);                                            // -------------------- Speed time  ---------------------------
   }
 }
 
 function stopTimer() {
-    if(customInterval){
-        clearInterval(customInterval);
-        customInterval = null;
-    }
+  if(customInterval){
+    clearInterval(customInterval);
+    customInterval = null;
+  }
 }
+
+
+// ! ---------------- Next Button -------------------------
+
+next.addEventListener("click", ()=>{
+  if(quest < lang.length - 1){
+    firstQuestionTimeOut = setTimeout ( questionFunc , 2000);
+    stopTimer();
+    // seconds.innerHTML = "0 : 0" + sec;
+    next.setAttribute("disabled", "");
+    variant.forEach((item) => {
+      item.style.pointerEvents = "none";
+    })
+    
+    if (quest < lang.length - 1) {
+      quest++;
+    } else {
+      final.style.left = "0px";
+      speedOmeter();
+    }
+  }else{
+    final.style.zIndex = "2";
+    final.style.opacity = "1";
+    mainSection.style.opacity = "0";
+    headerSection.style.opacity = "0";
+    next.setAttribute("disabled", "");
+    seconds.innerHTML = "0 : 0"+sec;
+    stopTimer();
+    speedOmeter();
+    percentTimeOut = setTimeout(()=>{
+      percent = (result/lang.length)*100;
+      if (!counterInterval) {
+        counterInterval = setInterval(()=>{
+          
+          if(count < Math.floor(percent)){
+            count++;
+            resultPercent.innerHTML = count + "%";
+          }
+        }, 20.5);
+      }
+    }, 4000)
+  }
+}) ;
+
 
 //! ----------------------- Variants ---------------------------------
 
@@ -238,6 +281,7 @@ variant.forEach((item) => {
       firstQuestionTimeOut = setTimeout ( questionFunc , 2000);
     } else {
         item.classList.add("uncorrect");
+        firstQuestionTimeOut = setTimeout ( questionFunc , 2000);
     }
 
     if (quest < lang.length - 1) {

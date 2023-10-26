@@ -1,6 +1,7 @@
 body{
-  background-image: url("https://highland-music.com/wp-content/uploads/2015/10/lines-wallpaper-aqua.gif");
-  background-size: contain;
+  /* background-image: url("https://highland-music.com/wp-content/uploads/2015/10/lines-wallpaper-aqua.gif");
+  background-size: contain; */
+  background-color: #85c2c1;
 }
 
 .headerSection, .mainSection{
@@ -110,6 +111,7 @@ body{
     font-size: 24px;
     font-weight: 500;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #735869;
 }
 
 .variantDiv{
@@ -126,13 +128,13 @@ body{
     border : 0px !important;
     font-size: 24px;
     font-weight: 500;
-    color: black;
+    color: #735869;
     clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .variant:hover{
-    background-color: rgb(214, 246, 186) !important;
+    background-color: #c8ccd6 !important;
     color: black !important;
 }
 
@@ -141,11 +143,16 @@ body{
   width: 100px;
   background-color: white;
   border: 1.5px solid #85C2C1;
-  color: green;
+  color: #599493;
   font-weight: 600;
   font-size: 18px;
   letter-spacing : 1px;
   clip-path: polygon(10% 0%, 90% 0%, 110% 50%, 90% 100%, 10% 100%, -10% 50%);
+}
+
+.next:hover{
+  background-color:  #599493;
+  border: 1.5px solid #599493;
 }
 
 .numb{
@@ -166,7 +173,7 @@ body{
     position: absolute;
     left: 32px !important;
     top: 13px !important; 
-    color:green;
+    color: #599493;
     z-index: 1;
 }
 
@@ -184,8 +191,7 @@ body{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 26px;
     font-weight: 500;
-    color : green;
-
+    color : #599493;
 }
 
 .timeDiv{
